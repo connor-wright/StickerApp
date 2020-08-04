@@ -11,5 +11,7 @@ module StickerApp
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.hosts << "9abe02f4f1a84a618ce74e659a0b5d2e.vfs.cloud9.us-east-1.amazonaws.com"
   end
 end
+
