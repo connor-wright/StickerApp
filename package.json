@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "@rails/webpacker": "4.2.2",
+    "elliptic": "^6.5.3",
+    "lodash": "^4.17.19"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  },
+  "name": "stickerapp",
+  "description": "A simple app for people to place stickers on a board",
+  "version": "1.0.0",
+  "main": "babel.config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/connor-wright/StickerApp.git"
+  },
+  "author": "Connor Wrgiht",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/connor-wright/StickerApp/issues"
+  },
+  "homepage": "https://github.com/connor-wright/StickerApp#readme"
+}
