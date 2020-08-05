@@ -10,7 +10,6 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    #TODO see if I can switch this to sqlite
     services:
       postgres:
         image: postgres:11.5
@@ -23,7 +22,6 @@ jobs:
       with:
         ruby-version: 2.6.x
         
-    #TODO see if I can switch this to sqlite
     - name: Install postgresSql 11 client
       run: |
         sudo apt-get -yqq install libpq-dev
