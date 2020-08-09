@@ -39,12 +39,12 @@ jobs:
         bin/rails db:setup
         
   test:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
       
-      services:
-        postgres:
-          image: postgres:11.5
-          ports: ["5432:5432"]
+    services:
+      postgres:
+        image: postgres:11.5
+        ports: ["5432:5432"]
       
     steps:
     - name: Run Tests
