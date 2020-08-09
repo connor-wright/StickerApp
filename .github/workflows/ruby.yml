@@ -41,6 +41,14 @@ jobs:
   test:
   
     - name: Run Tests
+      
+      runs-on: ubuntu-latest
+      
+      services:
+        postgres:
+          image: postgres:11.5
+          ports: ["5432:5432"]
+      
       env:
         PGHOST: localhost
         PGUSER: postgres
