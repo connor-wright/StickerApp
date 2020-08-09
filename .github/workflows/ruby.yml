@@ -39,6 +39,7 @@ jobs:
         bin/rails db:setup
         
   test:
+  
     - name: Run Tests
       env:
         PGHOST: localhost
