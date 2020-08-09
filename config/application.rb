@@ -15,6 +15,8 @@ module StickerApp
     config.hosts << "9abe02f4f1a84a618ce74e659a0b5d2e.vfs.cloud9.us-east-1.amazonaws.com"
     #allow deployment on heroku
     config.hosts << "sticker-application.herokuapp.com"
+    #allow for testing
+    config.hosts << "www.example.com"
   end
 end
 

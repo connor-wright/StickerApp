@@ -1,7 +1,8 @@
 require 'test_helper'
 
 class StaticControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  test "Should get landing page" do
+    get root_path
+    assert_response :success 
+  end
 end
