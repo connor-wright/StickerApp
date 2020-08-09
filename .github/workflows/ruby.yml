@@ -39,9 +39,6 @@ jobs:
         bin/rails db:setup
         
   test:
-  
-    - name: Run Tests
-      
       runs-on: ubuntu-latest
       
       services:
@@ -49,6 +46,7 @@ jobs:
           image: postgres:11.5
           ports: ["5432:5432"]
       
+      - name: Run Tests
       env:
         PGHOST: localhost
         PGUSER: postgres
