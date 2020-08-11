@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-class BoardCust extends React.Component {
+import React from "react"
+import PropTypes from "prop-types"
+class HelloWorld extends React.Component {
   render () {
     return (
       <React.Fragment>
@@ -10,7 +10,7 @@ class BoardCust extends React.Component {
   }
 }
 
-BoardCust.propTypes = {
+HelloWorld.propTypes = {
   greeting: PropTypes.string
 };
-export default BoardCust;
+export default HelloWorld

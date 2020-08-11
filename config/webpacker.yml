@@ -33,6 +33,7 @@ default: &default
     - .woff2
 
   extensions:
+    - .jsx
     - .mjs
     - .js
     - .sass
@@ -53,13 +54,12 @@ development:
 
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
-    https: false
+    https: true
     host: localhost
-    port: 8081
-    public: localhost:8081
+    port: 8082
+    public: 3.84.79.45.c9users.io:8082
     hmr: false
-    # Inline should be set to true if using HMR
-    inline: true
+    inline: false
     overlay: true
     compress: true
     disable_host_check: true
