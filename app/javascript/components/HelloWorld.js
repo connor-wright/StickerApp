@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import React, {Component} from "react"
+import Figaro  from 'figaro-js'
 class HelloWorld extends React.Component {
   constructor(props) {
     super(props);
@@ -11,8 +12,10 @@ class HelloWorld extends React.Component {
   }
 
   componentDidMount() {
+    Figaro.load();
+    console.log(process.env.pexels_api_key);
     fetch('https://api.pexels.com/v1/curated?per_page=1', {
-          headers: {'Authorization':'NotToday!'}})
+          headers: {'Authorization':process.environment.REACT_APP_PEXELS_API_KEY}})
       .then(res => res.json())
       .then(
         (result) => {
@@ -46,7 +49,7 @@ class HelloWorld extends React.Component {
         <ul>
           
             <li key={items.photos[0].url}>
-              <img src={items.photos[0].url}/>
+              <img src={items.photos[0].src.medium}/>
             </li>
 
         </ul>
@@ -54,55 +57,4 @@ class HelloWorld extends React.Component {
     }
   }
 }
-/*
-class HelloWorld extends React.Component {
-  
-  
-  constructor(props)
-  {
-    super(props);
-    this.state = {
-      error: null,
-      isLoaded: false,
-      items: []
-    };
-  }
-  
-  componentdidMount() {
-    //const client = createClient('NotToday!');
-    fetch("https://pokeapi.co/api/v2/")
-      .then(response => response.json())
-      .then(photos => {
-        console.log("loaded");
-        this.setState({
-          items: photos,
-          isLoaded: true
-        });
-      },
-      error =>{
-        console.log("error");
-      });
-  }
-  
-  render () 
-  {
-    const { error, isLoaded, items } = this.state;
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-      console.log(items)
-      return <div>Loading...</div>;
-    } else {
-      return(
-        <div>
-          items
-        </div>
-      )
-    }
-  }
-}
-
-HelloWorld.propTypes = {
-  greeting: PropTypes.string
-};*/
 export default HelloWorld

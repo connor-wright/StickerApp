@@ -72,3 +72,8 @@ yarn-debug.log*
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+# Holds API keys do not remove
+.env
+
+# Ignore application configuration
+/config/application.yml

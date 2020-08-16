@@ -7,6 +7,9 @@ gem 'react-rails'
 gem 'rails', '~> 6.0.0'
 gem 'pg', '~> 1.2.3'
 
+# For hiding API keys
+gem 'figaro'
+
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
