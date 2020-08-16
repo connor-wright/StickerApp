@@ -1,6 +1,5 @@
 import PropTypes from "prop-types"
 import React, {Component} from "react"
-import Figaro  from 'figaro-js'
 class HelloWorld extends React.Component {
   constructor(props) {
     super(props);
@@ -12,10 +11,7 @@ class HelloWorld extends React.Component {
   }
 
   componentDidMount() {
-    Figaro.load();
-    console.log(process.env.pexels_api_key);
-    fetch('https://api.pexels.com/v1/curated?per_page=1', {
-          headers: {'Authorization':process.environment.REACT_APP_PEXELS_API_KEY}})
+    fetch('/v1/pexels_api')
       .then(res => res.json())
       .then(
         (result) => {
