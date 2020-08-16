@@ -5,6 +5,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "elliptic": "^6.5.3",
     "lodash": "^4.17.19",
+    "pexels": "^1.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
