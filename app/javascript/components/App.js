@@ -1,6 +1,9 @@
-import PropTypes from "prop-types"
-import React, {Component} from "react"
-class HelloWorld extends React.Component {
+import React, {Component} from "react";
+import Sticker from './Sticker'
+import PropTypes from "prop-types";
+
+//Root for our component tree
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -9,7 +12,7 @@ class HelloWorld extends React.Component {
       items: []
     };
   }
-
+  
   componentDidMount() {
     fetch('/v1/pexels_api')
       .then(res => res.json())
@@ -33,7 +36,17 @@ class HelloWorld extends React.Component {
         }
       )
   }
-
+  
+  RenderStickers(photos){
+    let stickers = photos.map((photo) => {
+        return (
+        <li key={photo.url}> 
+          <Sticker url={photo.src.medium}/> 
+        </li>)
+      });
+    return <ul> {stickers} </ul>
+  }
+  
   render() {
     const { error, isLoaded, items } = this.state;
     if (error) {
@@ -42,15 +55,10 @@ class HelloWorld extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <ul>
-          
-            <li key={items.photos[0].url}>
-              <img src={items.photos[0].src.medium}/>
-            </li>
-
-        </ul>
+        this.RenderStickers(items.photos)
       );
     }
   }
 }
-export default HelloWorld
+
+export default App;

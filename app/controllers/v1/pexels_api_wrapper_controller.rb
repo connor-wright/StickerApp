@@ -11,7 +11,7 @@ class V1::PexelsApiWrapperController < ApplicationController
       client.headers['Authorization'] = "#{API_KEY}"
     end
     
-    response = @_client.public_send(:get, 'curated?per_page=1', {})
+    response = @_client.public_send(:get, 'curated?per_page=10', {})
     render json: response.body
   end
 end
