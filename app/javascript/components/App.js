@@ -14,13 +14,12 @@ class App extends React.Component {
   }
   
   componentDidMount() {
+    //fetch pictures from the pexels api wrapper
     fetch('/v1/pexels_api')
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
           this.setState({
-            
             isLoaded: true,
             items: result
           });
