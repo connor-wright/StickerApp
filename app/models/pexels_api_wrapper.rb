@@ -9,7 +9,11 @@ module PexelsApiWrapper
     API_KEY      = ENV['pexels_api_key']
     
     def curated_image()
-      request(http_method: :get, endpoint: 'curated?per_page=10')
+      request(http_method: :get, endpoint: 'curated?per_page=1')
+    end
+    
+    def search_image(keyword)
+      request(http_method: :get, endpoint: "search?query=#{keyword}&per_page=1")
     end
     
     private

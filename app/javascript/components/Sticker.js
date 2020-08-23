@@ -4,14 +4,36 @@ class Sticker extends React.Component {
   constructor(props)
   {
     super(props);
-    this.state = {
-      url: props.url
-    };
+    if(props.pos)
+    {
+      this.state = {
+        url: props.url,
+        xpos: props.pos.posX,
+        ypos: props.pos.posY
+      };
+    }
+    else{
+      this.state = {
+        url: props.url
+      }
+    }
   }
   
   render () {
+    const {xpos, ypos, url} = this.state;
+    const Stickerstyle = {
+      top: ypos,
+      left: xpos
+    };
+    
     return (
-        <img src={this.state.url}/>
+      <div style={Stickerstyle} className="sticker">
+        <img src={url}/>
+        <div>
+          xpos: {xpos}
+          ypos: {ypos}
+        </div>
+      </div>
     );
   }
 }
