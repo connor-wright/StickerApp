@@ -34,6 +34,8 @@ class Sticker extends React.Component {
   
   //load the image width and height
   componentDidMount(){
+    //TODO there is a slight flicker when the image is rendered then rerendered
+    //Need to delay loading until height and width are set
     let image = new Image();
     let updateWidthHeight = this.setWdithHeight;
     image.addEventListener("load", function(){
