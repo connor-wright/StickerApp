@@ -65,6 +65,8 @@ class App extends React.Component {
   }
   
   RenderStickers(photos){
+    //TODO investigate if the entire collection is being remade every render. 
+    //if so we need to find a different solution
     let stickers = photos.map((photo) => {
       return (
         //Need to add a unique key based on x and y pos
