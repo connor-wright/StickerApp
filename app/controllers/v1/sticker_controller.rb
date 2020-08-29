@@ -14,6 +14,6 @@ class V1::StickerController < ApplicationController
   private
   
   def sticker_params
-    params.permit(:id, :xpos, :ypos)
+    params.permit(:photo_id, :xpos, :ypos)
   end
 end
