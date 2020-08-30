@@ -4,7 +4,7 @@ class Sticker extends React.Component {
   constructor(props)
   {
     super(props);
-    this.setWdithHeight = this.setWdithHeight.bind(this)
+    this.setWdithHeight = this.setWdithHeight.bind(this);
     
     //clean this up need to find better solution for position
     if(props.pos)
@@ -20,7 +20,7 @@ class Sticker extends React.Component {
     else{
       this.state = {
         url: props.url
-      }
+      };
     }
   }
   

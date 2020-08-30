@@ -16,6 +16,10 @@ module PexelsApiWrapper
       request(http_method: :get, endpoint: "search?query=#{keyword}&per_page=1")
     end
     
+    def image(photo_id)
+      request(http_method: :get, endpoint: "/photos/#{photo_id}");
+    end
+    
     private
     
     def client

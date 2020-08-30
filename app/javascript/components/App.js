@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.onClick = this.onClick.bind(this)
+    this.onClick = this.onClick.bind(this);
     this.state = {
       error: null,
       isLoaded: false,
@@ -15,48 +15,79 @@ class App extends React.Component {
   }
   
   componentDidMount() {
-    //fetch pictures from the pexels api wrapper
-    fetch('/v1/pexels_api')
+    
+    //get existing photos
+    let photos;
+    fetch('/v1/stickers')
       .then(res => res.json())
       .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            photos: result.photos
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
+        (result) => photos = result,
         (error) => {
           this.setState({
             isLoaded: true,
             error
           });
-        }
-      );
+      });
+      
+    //get photo objects from pexels api
+    if(photos)
+    {
+      photos.map((photo) => {
+        this.addPhoto(photo.photo_id, photo.xpos, photo.ypos);
+      });
+    }
+    //fornow just add one photo
+    else{
+      this.addPhoto(100, 100);
+    }
+  }
+  
+  //TODO this name is bad/doesnt represnet its function
+  //maybe load?
+  addPhoto(photo_id, xpos, ypos){
+    this.fetchPhoto('/v1/pexels_api/sticker/' + photo_id);
   }
   
   addPhoto(clientX, clientY){
     //fetch pictures from the pexels api wrapper
-    fetch('/v1/pexels_api')
+    this.fetchPhoto('/v1/pexels_api', clientX, clientY, this.updateDb);
+  }
+  
+  updateDb(photo_id, xpos, ypos)
+  {
+    console.log(photo_id, xpos, ypos);
+    fetch('/v1/sticker', {
+      method: 'POST',
+      body: JSON.stringify({photo_id: photo_id, xpos: xpos, ypos: ypos})
+    })
+    .then(response => response.json)
+    .then(data => {
+      console.log("success: ", data);
+    }).catch((error) => {
+      console.log("error: ", error);
+    });
+  }
+  
+  fetchPhoto(url, xpos, ypos, updateDb)
+  {
+    fetch(url)
       .then(res => res.json())
       .then(
         (result) => {
           let photo = result.photos[0];
-          photo.pos = {posX: clientX, posY: clientY};
+          photo.pos = {posX: xpos, posY: ypos};
           this.setState(previousState => ({
             isLoaded: true,
             photos: [...previousState.photos, photo]
           }));
+          //update db if we need to 
+          if(updateDb)
+            updateDb(photo.id, xpos, ypos);
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           console.error("Could not load image");
         }
-      );
+    );
   }
   
   onClick(e){
