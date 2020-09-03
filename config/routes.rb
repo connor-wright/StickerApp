@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     get   'pexels_api/sticker/:id',   to: 'pexels_api_wrapper#index'
     
     get   'stickers',                 to: 'sticker#index'
-    post  'sticker',                  to: 'sticker#create'
+    post  'sticker/',           to: 'sticker#create'
   end
 end

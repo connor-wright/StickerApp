@@ -27,28 +27,30 @@ class App extends React.Component {
             isLoaded: true,
             error
           });
+      }).then(() => {
+        //get photo objects from pexels api
+        if(photos.length != 0)
+        {
+          photos.map((photo) => {
+            this.loadPhoto(photo.photo_id, photo.xpos, photo.ypos);
+          });
+        }
+        //fornow just add one photo
+        else{
+          this.addPhoto(100, 100);
+        }
       });
-      
-    //get photo objects from pexels api
-    if(photos)
-    {
-      photos.map((photo) => {
-        this.addPhoto(photo.photo_id, photo.xpos, photo.ypos);
-      });
-    }
-    //fornow just add one photo
-    else{
-      this.addPhoto(100, 100);
-    }
   }
   
   //TODO this name is bad/doesnt represnet its function
   //maybe load?
-  addPhoto(photo_id, xpos, ypos){
-    this.fetchPhoto('/v1/pexels_api/sticker/' + photo_id);
+  loadPhoto(photo_id, xpos, ypos){
+    console.log("loading");
+    this.fetchPhoto('/v1/pexels_api/sticker/' + photo_id, xpos, ypos);
   }
   
   addPhoto(clientX, clientY){
+    console.log("adding");
     //fetch pictures from the pexels api wrapper
     this.fetchPhoto('/v1/pexels_api', clientX, clientY, this.updateDb);
   }
@@ -56,6 +58,18 @@ class App extends React.Component {
   updateDb(photo_id, xpos, ypos)
   {
     console.log(photo_id, xpos, ypos);
+    $.ajax({
+      url: '/v1/sticker',
+      type: 'post',
+      data: {photo: {photo_id: photo_id, xpos: xpos, ypos: ypos}}
+      //TODO keeps returning running error function. Need to figure out why
+      /*success: function() {
+        alert('Successfuly sent');
+      },
+      error: function(){
+        alert('bleh');
+      }*/
+    });/*
     fetch('/v1/sticker', {
       method: 'POST',
       body: JSON.stringify({photo_id: photo_id, xpos: xpos, ypos: ypos})
@@ -65,7 +79,7 @@ class App extends React.Component {
       console.log("success: ", data);
     }).catch((error) => {
       console.log("error: ", error);
-    });
+    });*/
   }
   
   fetchPhoto(url, xpos, ypos, updateDb)
@@ -81,6 +95,7 @@ class App extends React.Component {
             photos: [...previousState.photos, photo]
           }));
           //update db if we need to 
+          console.log(updateDb);
           if(updateDb)
             updateDb(photo.id, xpos, ypos);
         },

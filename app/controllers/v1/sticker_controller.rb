@@ -3,10 +3,14 @@ class V1::StickerController < ApplicationController
   skip_before_action :verify_authenticity_token
   
   def create
-    puts params
+    puts sticker_params
     @sticker = Sticker.new(sticker_params)
     #TODO add error checking
-    @sticker.save
+    if @sticker.save
+      render status: 200, :json => "Successfuly added sticker"
+    else
+      render status: 400, :json => "Failed to add sticker"
+    end
   end
   
   def index
@@ -16,6 +20,6 @@ class V1::StickerController < ApplicationController
   private
   
   def sticker_params
-    params.permit(:photo_id, :xpos, :ypos)
+    params.require(:photo).permit(:photo_id, :xpos, :ypos)
   end
 end

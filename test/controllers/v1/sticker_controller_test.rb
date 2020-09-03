@@ -3,7 +3,7 @@ require 'test_helper'
 class V1::StickerControllerTest < ActionDispatch::IntegrationTest
   test "should be able to create a sticker" do
     post '/v1/sticker',
-      params: {photo_id: 'asdf', xpos: '0', ypos: '0'}
+      params: {photo:{photo_id: 'asdf', xpos: '0', ypos: '0'}}
     
     assert_response :success
   end
@@ -24,7 +24,7 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
     expected_ypos     = 76
     
     post '/v1/sticker',
-      params: {photo_id: expected_photo_id, xpos: expected_xpos, ypos: expected_ypos}
+      params: {photo: {photo_id: expected_photo_id, xpos: expected_xpos, ypos: expected_ypos}}
     
     assert_response :success
     
