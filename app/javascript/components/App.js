@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Sticker from './Sticker'
 import PropTypes from "prop-types";
+import Stickers from './Stickers'
 
 //Root for our component tree
 class App extends React.Component {
@@ -9,7 +10,7 @@ class App extends React.Component {
     this.onClick = this.onClick.bind(this);
     this.state = {
       error: null,
-      isLoaded: false,
+      isLoaded: true,
       photos: []
     };
   }
@@ -17,11 +18,12 @@ class App extends React.Component {
   componentDidMount() {
     
     //get existing photos
-    let photos;
+    /*
+    let photos = [];
     fetch('/v1/stickers')
       .then(res => res.json())
       .then(
-        (result) => photos = result,
+        (result) => {photos = result;},
         (error) => {
           this.setState({
             isLoaded: true,
@@ -39,7 +41,7 @@ class App extends React.Component {
         else{
           this.addPhoto(100, 100);
         }
-      });
+      });*/
   }
   
   //TODO this name is bad/doesnt represnet its function
@@ -107,7 +109,7 @@ class App extends React.Component {
   
   onClick(e){
     console.log("x: " + e.clientX + ", " + "y: " + e.clientY);
-    {this.addPhoto(e.clientX, e.clientY);}
+    //{this.addPhoto(e.clientX, e.clientY);}
   }
   
   RenderStickers(photos){
@@ -133,9 +135,10 @@ class App extends React.Component {
       return <div>Loading...</div>;
     } else {
       return (
-        <div onClick={this.onClick} className="App">
-          {this.RenderStickers(photos)}
-        </div>
+        //<div onClick={this.onClick} className="App">
+        //  {this.RenderStickers(photos)}
+        //</div>
+        <Stickers/>
       );
       
     }
