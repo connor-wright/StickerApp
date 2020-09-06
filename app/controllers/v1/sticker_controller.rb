@@ -10,10 +10,10 @@ class V1::StickerController < ApplicationController
     
     if @sticker.save
       logger.info "Added sticker"
-      render status: 200, :json => "Successfuly added sticker"
+      render status: 200, :json => @sticker
     else
       logger.info "Failed to add sticker"
-      render status: 400, :json => "Failed to add sticker"
+      render status: 400, :json =>  {:message => "Failed to add sticker"}
     end
   end
   

@@ -1,68 +1,58 @@
 import React from "react";
-import PropTypes from "prop-types";
 class Sticker extends React.Component {
   constructor(props)
   {
     super(props);
-    this.setWdithHeight = this.setWdithHeight.bind(this);
-    
-    //clean this up need to find better solution for position
-    if(props.pos)
-    {
-      this.state = {
-        url: props.url,
-        xClickPos: props.pos.posX,
-        yClickPos: props.pos.posY,
-        height: 0,
-        width:  0
-      };
-    }
-    else{
-      this.state = {
-        url: props.url
-      };
-    }
-  }
-  
-  setWdithHeight(width, height)
-  {
-    this.setState({
-        height: height,
-        width:  width
-      });
+    this.state = {
+      url: props.url,
+      xClickPos: props.xpos,
+      yClickPos: props.ypos,
+      height: 0,
+      width:  0,
+      isLoaded: false
+    };
   }
   
   //load the image width and height
   componentDidMount(){
-    //TODO there is a slight flicker when the image is rendered then rerendered
-    //Need to delay loading until height and width are set
     let image = new Image();
-    let updateWidthHeight = this.setWdithHeight;
+    let setWidthHeight = (width, height) => this.setState({
+          width: width,
+          height: height,
+          isLoaded: true
+        });
     image.addEventListener("load", function(){
-      updateWidthHeight(this.naturalWidth, this.naturalHeight);
+      let width = this.naturalWidth;
+      let height = this.naturalHeight;
+      
+      setWidthHeight(width, height);
     });
     
     image.src = this.state.url;
   }
   
   render () {
-    const {xClickPos, yClickPos, width, height, url} = this.state;
-    let xpos = xClickPos? xClickPos - width/2: 0;
-    let ypos = yClickPos? yClickPos - height/2: 0;
+    const {xClickPos, yClickPos, width, height, url, isLoaded} = this.state;
+    let xpos = xClickPos - width/2;
+    let ypos = yClickPos - height/2;
     const Stickerstyle = {
       top: ypos,
       left: xpos
     };
-    
-    return (
-      <div style={Stickerstyle} className="sticker">
-        <img src={url}/>
-        <div>
-          xpos: {xpos}
-          ypos: {ypos}
+    if(!isLoaded){
+      return(<React.Fragment/>);
+    }
+    else{
+      return (
+        <div style={Stickerstyle} className="sticker">
+          <img src={url}/>
+          <div>
+            xpos: {xpos}
+            ypos: {ypos}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
