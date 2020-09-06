@@ -10,7 +10,7 @@ class V1::StickerController < ApplicationController
     
     if @sticker.save
       logger.info "Added sticker"
-      render status: 200, :json => @sticker
+      render status: 200, :json => Sticker.select(select_params).find(@sticker.id)
     else
       logger.info "Failed to add sticker"
       render status: 400, :json =>  {:message => "Failed to add sticker"}
@@ -18,7 +18,7 @@ class V1::StickerController < ApplicationController
   end
   
   def index
-    render :json => @stickers = Sticker.all
+    render :json => @stickers = Sticker.all.select(select_params)
   end
   
   private
@@ -26,4 +26,9 @@ class V1::StickerController < ApplicationController
   def sticker_params
     params.require(:photo).permit(:photo_id, :xpos, :ypos, :artist, :url)
   end
+  
+  def select_params()
+    [:id, :photo_id, :xpos, :ypos, :artist, :url]
+  end
+  
 end

@@ -2,9 +2,11 @@ require 'test_helper'
 
 class V1::StickerControllerTest < ActionDispatch::IntegrationTest
   test "should be able to create a sticker" do
+    expectedPhotoId = 'asdf'
+    
     post '/v1/sticker',
       params: {photo:{
-                photo_id: 'asdf',
+                photo_id: expectedPhotoId,
                 xpos: '0',
                 ypos: '0',
                 url: 'https:\\whater.org',
@@ -12,6 +14,10 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
               }}
     
     assert_response :success
+    
+    #check we get back the same sticker we created
+    sticker = JSON.parse(@response.body)
+    assert_equal expectedPhotoId, sticker['photo_id']
   end
   
   test "should be able to retrieve created sticker" do
@@ -52,5 +58,15 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
     assert_equal expected_ypos,   sticker['ypos']
     assert_equal expected_url,    sticker['url']
     assert_equal expected_artist, sticker['artist']
+  end
+  
+  test "Should only return public data" do
+    get '/v1/stickers'
+    
+    assert_response :success
+    
+    stickers = JSON.parse(@response.body)
+    expected_values = ['id', 'photo_id', 'xpos', 'ypos', 'artist', 'url']
+    assert_equal expected_values.count, stickers.values_at(JSON).count
   end
 end
