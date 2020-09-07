@@ -6,7 +6,6 @@ class Stickers extends React.Component {
   constructor(props) {
     super(props);
     this.onClick    = this.onClick.bind(this);
-    this.AddSticker = this.AddSticker.bind(this);
     this.state = {
       error: null,
       isLoaded: false,
