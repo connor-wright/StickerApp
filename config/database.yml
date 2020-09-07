@@ -80,4 +80,3 @@ test:
 #
 production:
   <<: *default
-  database: StickerApp_production
