@@ -17,6 +17,7 @@ module StickerApp
     config.hosts << "sticker-application.herokuapp.com"
     #allow for testing
     config.hosts << "www.example.com"
+    config.hosts << "localhost"
   end
 end
 
