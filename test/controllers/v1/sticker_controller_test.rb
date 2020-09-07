@@ -62,11 +62,11 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
   
   test "Should only return public data" do
     get '/v1/stickers'
-    
     assert_response :success
     
-    stickers = JSON.parse(@response.body)
-    expected_values = ['id', 'photo_id', 'xpos', 'ypos', 'artist', 'url']
-    assert_equal expected_values.count, stickers.values_at(JSON).count
+    stickers = JSON.parse(@response.body)[0]
+    expected_values = ["id", "photo_id", "xpos", "ypos", "artist", "url"].to_s
+    actual_values   = stickers.keys.to_s
+    assert_equal expected_values, actual_values
   end
 end
