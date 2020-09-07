@@ -20,6 +20,7 @@ class Stickers extends React.Component {
       .then(
         (result) => {
           this.setState({
+            
             stickers: result.map(photo => this.CreateSticker(photo)),
             isLoaded: true
           });
