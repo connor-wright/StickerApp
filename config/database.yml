@@ -80,7 +80,3 @@ test:
 #
 production:
   <<: *default
-  url:      <%= ENV['DATABASE_URL'] %>
-  database: StickerApp_production
-  username: StickerApp
-  password: <%= ENV['STICKERAPP_DATABASE_PASSWORD'] %> 
