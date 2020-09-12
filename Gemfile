@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'webpacker'
 gem 'react-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.0'
+gem 'rails', '~> 6.0.3.3'
 gem 'pg', '~> 1.2.3'
 
 # For hiding API keys
