@@ -1,5 +1,6 @@
 import React from "react";
 import Stickers from './Stickers';
+import SearchBar from './SearchBar';
 
 //Root for our component tree
 class App extends React.Component {
@@ -8,7 +9,12 @@ class App extends React.Component {
   }
   
   render() {
-    return (<Stickers/>);
+    return (
+      <div className='AppContainer'>
+        <SearchBar/>
+        <Stickers/>
+      </div>
+    );
   }
 }
 
