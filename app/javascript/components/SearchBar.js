@@ -16,15 +16,16 @@ class SearchBar extends React.Component {
   handleSubmit(event) {
     if(this.state.value)
     {
-      let AddStickers = (photos) => this.setState(() => {
+      let AddStickers = (photos) => this.setState(() => ({
         stickers: photos.map(photo => 
         {
-          return(<img src={photo.src.small}/>);
-        });
-      });
+          return <img src={photo.src.small}/>;
+        })
+      }));
       fetch('/v1/pexels_api/search/' + this.state.value)
       .then(res => res.json())
       .then(result => {
+        console.log('picture');
         AddStickers(result.photos);
       });
     }
@@ -33,7 +34,6 @@ class SearchBar extends React.Component {
   
   render () {
     const {stickers} = this.state;
-    
     return (
       <div className='SearchBar'>
         <form onSubmit={this.handleSubmit}>
@@ -42,7 +42,7 @@ class SearchBar extends React.Component {
             <input type="text" value={this.state.value} onChange={this.handleChange} />
           </label>
             <input type="submit" value="Submit" />
-          </form> 
+          </form>
           {stickers}
       </div>
     );

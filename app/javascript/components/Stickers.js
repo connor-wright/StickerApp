@@ -86,7 +86,6 @@ class Stickers extends React.Component {
   render () {
     const {error, isLoaded, stickers} = this.state;
     
-    console.log(stickers);
     if(error){
       return <div>Error: {error.message}</div>;
     }
