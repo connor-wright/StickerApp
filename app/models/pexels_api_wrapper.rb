@@ -13,7 +13,7 @@ module PexelsApiWrapper
     end
     
     def search_image(keyword)
-      request(http_method: :get, endpoint: "search?query=#{keyword}&per_page=1")
+      request(http_method: :get, endpoint: "search?query=#{keyword}")
     end
     
     def image(photo_id)

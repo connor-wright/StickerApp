@@ -1,6 +1,5 @@
-import React from "react"
-import PropTypes from "prop-types"
-import Sticker from "./Sticker"
+import React from "react";
+import Sticker from "./Sticker";
 
 class Stickers extends React.Component {
   constructor(props) {
@@ -20,7 +19,6 @@ class Stickers extends React.Component {
       .then(
         (result) => {
           this.setState({
-            
             stickers: result.map(photo => this.CreateSticker(photo)),
             isLoaded: true
           });
@@ -76,7 +74,7 @@ class Stickers extends React.Component {
   
   CreateSticker(photo){
     return(
-      <Sticker 
+      <Sticker
         url={photo.url}
         xpos = {photo.xpos}
         ypos = {photo.ypos}

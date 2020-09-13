@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :v1, defaults: {format:'json'} do
     get   'api',                      to: 'api#index'
     get   'pexels_api',               to: 'pexels_api_wrapper#index'
+    get   'pexels_api/search/:query',               to: 'pexels_api_wrapper#search'
     get   'pexels_api/sticker/:id',   to: 'pexels_api_wrapper#index'
     
     get   'stickers',                 to: 'sticker#index'
