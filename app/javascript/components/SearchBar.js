@@ -1,5 +1,12 @@
 import React from "react";
-import Sticker from "./Sticker";
+import Photo from "./Photo";
+import update from "immutability-helper";
+
+//TODO clean this up
+function getImage(url) {
+  return {active: false, url: url};
+}
+  
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -7,6 +14,16 @@ class SearchBar extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.onClick      = this.onClick.bind(this);
+  }
+  
+  
+  onClick(xi) {
+    const images = update(this.state.stickers, {
+      [xi] : {active: {$set: true}}
+    });
+    this.setState({stickers: images});
+    console.log(this.state.stickers);
   }
   
   handleChange(event) {
@@ -19,13 +36,12 @@ class SearchBar extends React.Component {
       let AddStickers = (photos) => this.setState(() => ({
         stickers: photos.map(photo => 
         {
-          return <img src={photo.src.small}/>;
+          return getImage(photo.src.small);
         })
       }));
       fetch('/v1/pexels_api/search/' + this.state.value)
       .then(res => res.json())
       .then(result => {
-        console.log('picture');
         AddStickers(result.photos);
       });
     }
@@ -43,7 +59,13 @@ class SearchBar extends React.Component {
           </label>
             <input type="submit" value="Submit" />
           </form>
-          {stickers}
+          {stickers.map((image, xi) =>
+            <Photo 
+              url={image.url}
+              xi={xi}
+              key={xi}
+              active={image.active}
+              onClick={this.onClick}/>)}
       </div>
     );
   }
