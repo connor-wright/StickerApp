@@ -4,7 +4,7 @@ import Sticker from "./Sticker";
 class Stickers extends React.Component {
   constructor(props) {
     super(props);
-    this.onClick    = this.onClick.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.state = {
       error: null,
       isLoaded: false,
@@ -38,12 +38,14 @@ class Stickers extends React.Component {
     let AddSticker = (photo) => this.setState(previousState => ({
                 stickers: [...previousState.stickers, this.CreateSticker(photo)]
               }));
-    //for now grab a random photo
-    fetch('/v1/pexels_api/')
+    //for now grab a random 
+    if(this.props.activeId)
+    {
+      fetch(`/v1/pexels_api/?photo_id=${this.props.activeId}`)
       .then(res => res.json())
       .then(
         (result) => {
-          let photo = result.photos[0];
+          let photo = result;
           photo = {
             photo_id: photo.id, 
             url: photo.src.small,
@@ -62,14 +64,16 @@ class Stickers extends React.Component {
               AddSticker(photo);
             },
             error: function(error){
-              console.error("Could not add sticker");
+              console.error("Could not add sticker " + error);
             }
           });
         },
         (error) => {
-          console.error("Could not add sticker");
+          console.error("Could not add sticker " + error);
         }
-    );
+      );
+    }
+    
   }
   
   CreateSticker(photo){

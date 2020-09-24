@@ -17,7 +17,7 @@ module PexelsApiWrapper
     end
     
     def image(photo_id)
-      request(http_method: :get, endpoint: "/photos/#{photo_id}");
+      request(http_method: :get, endpoint: "photos/#{photo_id}");
     end
     
     private
@@ -35,5 +35,4 @@ module PexelsApiWrapper
       return response.body
     end
   end
-  
 end
