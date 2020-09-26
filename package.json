@@ -12,6 +12,8 @@
     "react_ujs": "^2.6.1"
   },
   "devDependencies": {
+    "@testing-library/react": "^11.0.4",
+    "jest": "^26.4.2",
     "webpack-dev-server": "^3.11.0"
   },
   "name": "stickerapp",
@@ -23,7 +25,17 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript/components"
+    ],
+    "roots": [
+      "test/javascript"
+    ]
   },
   "repository": {
     "type": "git",
