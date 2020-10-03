@@ -1,7 +1,7 @@
 import React from "react";
 import "./APIInterface";
 import SearchPhoto from "./SearchPhoto";
-import {SearchImg} from "./APIInterface"
+import {SearchImgs} from "./APIInterface"
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class SearchBar extends React.Component {
     this.setState({value: event.target.value});
   }
   
-  async handleSubmit(event) {
+  handleSubmit(event) {
     if(this.state.value)
     {
       let AddStickers = (photos) => this.setState(() => ({
@@ -37,7 +37,7 @@ class SearchBar extends React.Component {
           return {active: false, id: photo.id, url: photo.src.small};
         })
       }));
-      SearchImg(this.state.value).then((result) => AddStickers(result.photos));
+      SearchImgs(this.state.value).then((result) => AddStickers(result.photos));
     }
     event.preventDefault();
   }

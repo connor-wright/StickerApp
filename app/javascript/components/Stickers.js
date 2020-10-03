@@ -1,5 +1,6 @@
 import React from "react";
 import Sticker from "./Sticker";
+import {GetImgs, GetImgByID, PostNewPhoto} from "./APIInterface";
 
 class Stickers extends React.Component {
   constructor(props) {
@@ -14,9 +15,7 @@ class Stickers extends React.Component {
   
   componentDidMount(){
     //load stickers
-    fetch('/v1/stickers')
-      .then(res => res.json())
-      .then(
+    GetImgs().then(
         (result) => {
           this.setState({
             stickers: result.map(photo => this.CreateSticker(photo)),
@@ -38,11 +37,9 @@ class Stickers extends React.Component {
     let AddSticker = (photo) => this.setState(previousState => ({
                 stickers: [...previousState.stickers, this.CreateSticker(photo)]
               }));
-    //for now grab a random 
     if(this.props.activeId)
     {
-      fetch(`/v1/pexels_api/?photo_id=${this.props.activeId}`)
-      .then(res => res.json())
+      GetImgByID(this.props.activeId)
       .then(
         (result) => {
           let photo = result;
@@ -54,18 +51,11 @@ class Stickers extends React.Component {
             ypos: ypos
           };
           //add new photo to the db
-          $.ajax({
-            url: '/v1/sticker',
-            type: 'post',
-            dataType: 'json',
-            data: {photo: photo},
-            success: function(photo) {
-              //add photo to stickers
-              AddSticker(photo);
-            },
-            error: function(error){
-              console.error("Could not add sticker " + error);
-            }
+          PostNewPhoto(photo).then((response) => {
+            AddSticker(response);
+          },
+          (error) => {
+            console.error("Could not add sticker " + error);
           });
         },
         (error) => {
