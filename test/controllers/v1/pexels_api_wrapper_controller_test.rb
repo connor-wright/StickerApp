@@ -6,4 +6,13 @@ class V1::PexelsApiWrapperControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_nothing_raised {JSON.parse(response.body)}
   end
+  
+  test "Can search from the pexels api" do 
+    get '/v1/pexels_api/search/taco'
+    assert_response :success
+    #for now just check the body returns an object with photos
+    actual_response = JSON.parse(response.body)
+    assert_not actual_response.empty?
+    assert actual_response.has_key?('photos')
+  end
 end

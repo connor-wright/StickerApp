@@ -1,10 +1,11 @@
 import React from 'react';
 import App from 'App';
+import SearchBar from 'SearchBar'
 import {cleanup, fireEvent, render} from '@testing-library/react';
 
 
 
-test('1 + 1 equals 2', () => {
+test('Searching', () => {
   console.log(App.toString());
   expect(1 +1).toBe(2);
 })
