@@ -1,7 +1,6 @@
 import React from "react";
-import "./APIInterface";
 import SearchPhoto from "./SearchPhoto";
-import {SearchImgs} from "./APIInterface"
+import {SearchImgs} from "./BackendAPI";
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -49,20 +48,20 @@ class SearchBar extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label>
             search:
-            <input type="text" data-testid='searchInput' value={this.state.value} onChange={this.handleChange} />
+            <input type="text" className='searchInput' value={this.state.value} onChange={this.handleChange} />
           </label>
             <input type="submit" value="Submit" />
-          </form>
-          {stickers.map((image, xi) =>
-            <SearchPhoto 
-              data-testid='searchPhoto'
-              setActiveId={this.props.setActiveId}
-              url={image.url}
-              xi={xi}
-              key={xi}
-              active={image.active}
-              onClick={this.onClick}/>
-          )}
+        </form>
+        {stickers.map((image, xi) =>
+          <SearchPhoto 
+            data-testid='searchPhoto'
+            setActiveId={this.props.setActiveId}
+            url={image.url}
+            xi={xi}
+            key={xi}
+            active={image.active}
+            onClick={this.onClick}/>
+        )}
       </div>
     );
   }

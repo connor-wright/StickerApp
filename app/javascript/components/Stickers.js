@@ -1,6 +1,6 @@
 import React from "react";
 import Sticker from "./Sticker";
-import {GetImgs, GetImgByID, PostNewPhoto} from "./APIInterface";
+import {GetImgs, GetImgByID, PostNewPhoto} from "./BackendAPI";
 
 class Stickers extends React.Component {
   constructor(props) {
