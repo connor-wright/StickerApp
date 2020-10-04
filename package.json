@@ -40,7 +40,7 @@
     "roots": [
       "test/javascript"
     ],
-    "setupFilesAfterEnv": ["/home/ubuntu/environment/StickerApp/test/javascript/setupTests"]
+    "setupFilesAfterEnv": ["./test/javascript/setupTests"]
   },
   "repository": {
     "type": "git",
