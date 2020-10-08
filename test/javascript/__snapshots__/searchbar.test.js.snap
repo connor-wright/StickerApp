@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchBar /> should populate search images based on data 1`] = `
+<SearchBar>
+  <div
+    className="SearchBar"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <label>
+        search:
+        <input
+          className="searchInput"
+          onChange={[Function]}
+          type="text"
+          value="23"
+        />
+      </label>
+      <input
+        type="submit"
+        value="Submit"
+      />
+    </form>
+  </div>
+</SearchBar>
+`;
+
+exports[`<SearchBar /> should search triggers photo search to backend 1`] = `
+<SearchBar>
+  <div
+    className="SearchBar"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <label>
+        search:
+        <input
+          className="searchInput"
+          onChange={[Function]}
+          type="text"
+          value="23"
+        />
+      </label>
+      <input
+        type="submit"
+        value="Submit"
+      />
+    </form>
+  </div>
+</SearchBar>
+`;

@@ -12,11 +12,15 @@
     "react_ujs": "^2.6.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
     "@testing-library/react": "^11.0.4",
-    "babel-jest": "^26.3.0",
+    "babel-jest": "^26.5.2",
     "babel-preset-es2015": "^6.24.1",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-to-json": "^3.6.1",
     "jest": "^26.4.2",
     "webpack-dev-server": "^3.11.0"
   },
@@ -40,7 +44,12 @@
     "roots": [
       "test/javascript"
     ],
-    "setupFilesAfterEnv": ["./test/javascript/setupTests"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFilesAfterEnv": [
+      "./test/javascript/setupTests"
+    ]
   },
   "repository": {
     "type": "git",

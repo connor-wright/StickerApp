@@ -2,10 +2,9 @@ import React from 'react';
 import SearchBar from 'SearchBar';
 import {SearchImgs} from "BackendAPI";
 import { mount } from 'enzyme';
+import SearchPhoto from 'SearchPhoto';
 
-jest.mock('BackendAPI', () => ({
-  SearchImgs: jest.fn()
-}));
+jest.mock('BackendAPI')
 
 let activeId;
 let setActiveId;
@@ -22,15 +21,25 @@ afterEach(() => {
 });
 
 describe('<SearchBar />', () =>{
-  it('search triggers photo search to backend', () =>{
+  it('should search triggers photo search to backend', () =>{
     //arrange
-    let photoData = {photos: [{id: 'Taco', src: {small: 'https://imgur.com/gallery/3nSMulw'}}]};
-    SearchImgs.mockResolvedValue(photoData);
     //act
     searchBar.find('.searchInput').simulate('change', {target: {value: '23'}});
     searchBar.find('.searchInput').simulate('submit');
     
     //assert
     expect(SearchImgs).toHaveBeenCalled();
+    //expect(searchBar).toMatchSnapshot();
+  });
+  
+  it('should populate search images based on data', () => {
+    //assert
+    
+    //act
+    searchBar.find('.searchInput').simulate('change', {target: {value: '23'}});
+    searchBar.find('.searchInput').simulate('submit');
+    
+    //assert
+    expect(searchBar).toMatchSnapshot();
   });
 });
