@@ -1,5 +1,6 @@
 import React from "react";
 import SearchPhoto from "./SearchPhoto";
+import {SearchImgs} from "./BackendAPI";
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class SearchBar extends React.Component {
           return {active: false, id: photo.id, url: photo.src.small};
         })
       }));
-      this.props.searchImgs(this.state.value).then((result) =>{
+      SearchImgs(this.state.value).then((result) =>{
         AddStickers(result.photos)});
     }
     event.preventDefault();

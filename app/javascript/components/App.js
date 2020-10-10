@@ -1,7 +1,6 @@
 import React from "react";
 import Stickers from './Stickers';
 import SearchBar from './SearchBar';
-import {SearchImgs} from "./BackendAPI";
 
 //Root for our component tree
 class App extends React.Component {
@@ -17,7 +16,7 @@ class App extends React.Component {
   render() {
     return (
       <div className='AppContainer'>
-        <SearchBar searchImgs={SearchImgs}  setActiveId={this.setActiveId}/>
+        <SearchBar setActiveId={this.setActiveId}/>
         <Stickers activeId={this.state.activeId}/>
       </div>
     );
