@@ -1,33 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<SearchBar /> should populate search images based on data 1`] = `
-<SearchBar>
-  <div
-    className="SearchBar"
-  >
-    <form
-      onSubmit={[Function]}
-    >
-      <label>
-        search:
-        <input
-          className="searchInput"
-          onChange={[Function]}
-          type="text"
-          value="23"
-        />
-      </label>
-      <input
-        type="submit"
-        value="Submit"
-      />
-    </form>
-  </div>
-</SearchBar>
-`;
-
 exports[`<SearchBar /> should search triggers photo search to backend 1`] = `
-<SearchBar>
+<SearchBar
+  searchImgs={
+    [MockFunction] {
+      "calls": Array [
+        Array [
+          "23",
+        ],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": Promise {},
+        },
+      ],
+    }
+  }
+>
   <div
     className="SearchBar"
   >
@@ -48,6 +38,19 @@ exports[`<SearchBar /> should search triggers photo search to backend 1`] = `
         value="Submit"
       />
     </form>
+    <SearchPhoto
+      active={false}
+      key="0"
+      onClick={[Function]}
+      url="https://imgur.com/gallery/3nSMulw"
+      xi={0}
+    >
+      <img
+        onClick={[Function]}
+        src="https://imgur.com/gallery/3nSMulw"
+        style={Object {}}
+      />
+    </SearchPhoto>
   </div>
 </SearchBar>
 `;

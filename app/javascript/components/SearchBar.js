@@ -1,6 +1,5 @@
 import React from "react";
 import SearchPhoto from "./SearchPhoto";
-import {SearchImgs} from "./BackendAPI";
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -28,6 +27,7 @@ class SearchBar extends React.Component {
   }
   
   handleSubmit(event) {
+    
     if(this.state.value)
     {
       let AddStickers = (photos) => this.setState(() => ({
@@ -36,7 +36,8 @@ class SearchBar extends React.Component {
           return {active: false, id: photo.id, url: photo.src.small};
         })
       }));
-      SearchImgs(this.state.value).then((result) => AddStickers(result.photos));
+      this.props.searchImgs(this.state.value).then((result) =>{
+        AddStickers(result.photos)});
     }
     event.preventDefault();
   }
@@ -54,7 +55,6 @@ class SearchBar extends React.Component {
         </form>
         {stickers.map((image, xi) =>
           <SearchPhoto 
-            data-testid='searchPhoto'
             setActiveId={this.props.setActiveId}
             url={image.url}
             xi={xi}

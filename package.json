@@ -2,6 +2,7 @@
   "dependencies": {
     "@babel/preset-react": "^7.10.4",
     "@rails/webpacker": "5.1.1",
+    "babel-loader": "^8.1.0",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "elliptic": "^6.5.3",
     "lodash": "^4.17.19",

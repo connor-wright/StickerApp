@@ -2,16 +2,16 @@ import React from 'react';
 import SearchBar from 'SearchBar';
 import {SearchImgs} from "BackendAPI";
 import { mount } from 'enzyme';
-import SearchPhoto from 'SearchPhoto';
 
-jest.mock('BackendAPI')
+jest.mock('BackendAPI');
+const runAllPromises = () => new Promise(setImmediate);
 
 let activeId;
 let setActiveId;
 let searchBar;
 
 beforeEach(() =>{
-  searchBar = mount(<SearchBar />);
+  searchBar = mount(<SearchBar searchImgs={SearchImgs} />);
   activeId = '';
   setActiveId = newActiveId => activeId = newActiveId;
 });
@@ -21,25 +21,16 @@ afterEach(() => {
 });
 
 describe('<SearchBar />', () =>{
-  it('should search triggers photo search to backend', () =>{
+  it('should search triggers photo search to backend', async () =>{
     //arrange
     //act
-    searchBar.find('.searchInput').simulate('change', {target: {value: '23'}});
-    searchBar.find('.searchInput').simulate('submit');
-    
-    //assert
+    await searchBar.find('.searchInput').simulate('change', {target: {value: '23'}});
+    await searchBar.find('.searchInput').simulate('submit');
     expect(SearchImgs).toHaveBeenCalled();
-    //expect(searchBar).toMatchSnapshot();
-  });
-  
-  it('should populate search images based on data', () => {
-    //assert
-    
-    //act
-    searchBar.find('.searchInput').simulate('change', {target: {value: '23'}});
-    searchBar.find('.searchInput').simulate('submit');
     
     //assert
+    await runAllPromises();
+    searchBar.update();
     expect(searchBar).toMatchSnapshot();
   });
 });
