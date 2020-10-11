@@ -1,18 +1,18 @@
 import React from 'react';
 import SearchBar from 'SearchBar';
 import SearchPhoto from 'SearchPhoto';
-const BackendAPI = require('BackendAPI');
 import { mount } from 'enzyme';
+import {runAllPromises} from '../Utils/utils';
+const BackendAPI = require('BackendAPI');
 
 let activeId;
 let setActiveId;
 let searchBar;
 
 jest.mock('BackendAPI');
-const runAllPromises = () => new Promise(setImmediate);
 const SearchImgs = BackendAPI.SearchImgs;
 
-describe('<SearchBar />', () =>{
+describe('<SearchBar />', () => {
   
   beforeEach(() =>{
     activeId = '';
