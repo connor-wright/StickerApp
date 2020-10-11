@@ -43,13 +43,13 @@
       "app/javascript/components"
     ],
     "roots": [
-      "test/javascript"
+      "test/javascript/FrontEnd"
     ],
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ],
     "setupFilesAfterEnv": [
-      "./test/javascript/setupTests"
+      "./test/javascript/FrontEnd/Setup/setupTests"
     ]
   },
   "repository": {
