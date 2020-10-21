@@ -12,6 +12,9 @@ const PostNewPhoto = BackendAPI.PostNewPhoto;
 let stickersComponent = null;
 let activeId = null;
 
+//There are some weird behaviors with enzyme and to match snapshot
+//they dont seem to be in sync. 
+//TODO figure this out
 describe('<Stickers />' , () => {
   beforeAll(() => {
     GetImgs.mockResolvedValue([]);
