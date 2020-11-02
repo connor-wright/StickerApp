@@ -39,14 +39,15 @@ class Stickers extends React.Component {
               }));
     if(this.props.activeId)
     {
+      console.log(this.props.activeId);
       GetImgByID(this.props.activeId)
       .then(
         (result) => {
+          console.log(result);
           let photo = result;
           photo = {
-            photo_id: photo.id, 
-            url: photo.src.small,
-            artist: photo.photographer,
+            photo_id: photo.data.id, 
+            url: photo.data.link,
             xpos: xpos,
             ypos: ypos
           };
@@ -59,7 +60,7 @@ class Stickers extends React.Component {
           });
         },
         (error) => {
-          console.error("Could not add sticker " + error);
+          console.error("Could not add sticker" + error);
         }
       );
     }

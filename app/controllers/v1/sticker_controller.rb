@@ -30,5 +30,4 @@ class V1::StickerController < ApplicationController
   def select_params()
     [:id, :photo_id, :xpos, :ypos, :artist, :url]
   end
-  
 end

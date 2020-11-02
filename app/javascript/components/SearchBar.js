@@ -31,13 +31,14 @@ class SearchBar extends React.Component {
     if(this.state.value)
     {
       let AddStickers = (photos) => this.setState(() => ({
-        stickers: photos.map(photo => 
+        //TODO have the backend filter out theses null cases.
+        stickers: photos.filter(photo => photo.images).map(photo => 
         {
-          return {active: false, id: photo.id, url: photo.src.small};
+          return {active: false, id: photo.images[0].id, url: photo.images[0].link};
         })
       }));
       SearchImgs(this.state.value).then((result) =>{
-        AddStickers(result.photos)});
+        AddStickers(result.data)});
     }
     event.preventDefault();
   }

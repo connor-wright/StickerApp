@@ -1,7 +1,7 @@
 export function SearchImgs(query){
   return new Promise((resolve, reject) => 
   {
-    fetch('/v1/pexels_api/search/' + query)
+    fetch('/v1/imgur_api/search/' + query)
       .then(res => res.json())
       .then(result => {
         resolve(result);
@@ -25,8 +25,8 @@ export function GetImgs() {
 export function GetImgByID(id){
   return new Promise((resolve, reject) => 
     {
-      fetch(`/v1/pexels_api/?photo_id=${id}`)
-        .then(res => res.json())
+      fetch(`/v1/imgur_api/?photo_id=${id}`)
+        .then(res => {console.log(res.body); return res.json()})
         .then((result) => {
           resolve(result);
         }, (error) => {
