@@ -26,7 +26,7 @@ describe('<SearchBar />', () => {
   
   it('should search triggers photo search to backend', async () =>{
     //arrange
-    SearchImgs.mockResolvedValue({photos: []});
+    SearchImgs.mockResolvedValue({data: [{images: [{id: 'taco'}]}]});
     
     //act
     const searchForm = searchBar.find('.searchInput');
@@ -37,8 +37,8 @@ describe('<SearchBar />', () => {
   
   it('should create search images after submit', async ()=> {
     //arrange
-    SearchImgs.mockResolvedValue({photos: [
-      {id: 'Taco', src: {small: 'https://imgur.com/gallery/3nSMulw'}}
+    SearchImgs.mockResolvedValue({data: [
+      {images: [{id: 'Taco', link: 'https://imgur.com/gallery/3nSMulw'}]}
     ]});
     
     //act
@@ -68,8 +68,8 @@ describe('<SearchBar />', () => {
   it('should set the active ID after clicking on an image', async () => {
     //arrange
     const expectedId = 'TacosAreTheBest';
-    SearchImgs.mockResolvedValue({photos: [
-      {id: expectedId, src: {small: 'https://imgur.com/gallery/3nSMulw'}}
+    SearchImgs.mockResolvedValue({data: [
+      {images: [{id: expectedId, link:'https://imgur.com/gallery/3nSMulw'}]}
     ]});
     const searchForm = searchBar.find('.searchInput');
     await searchForm.simulate('change', {target: {value: 'whatever'}});

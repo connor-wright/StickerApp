@@ -64,20 +64,17 @@ describe('<Stickers />' , () => {
     const expectedXpos = 25;
     const expectedYpos = 75;
     const url = 'https://imgur.com/gallery/3nSMulw';
-    const photographer = 'TheTacoMan';
     const expectedPostNewPhotoArgs = {
       photo_id: activeId,
       url: url,
-      artist: photographer,
       xpos: expectedXpos,
       ypos: expectedYpos
     };
     
-    GetImgById.mockResolvedValue({
+    GetImgById.mockResolvedValue({data: {
       id: activeId,
-      src: { small: url },
-      photographer: photographer
-    });
+      link: url
+    }});
     PostNewPhoto.mockResolvedValue({
       url: url, 
       xpos: expectedXpos,

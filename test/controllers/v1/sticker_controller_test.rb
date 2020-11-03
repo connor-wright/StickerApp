@@ -9,8 +9,7 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
                 photo_id: expectedPhotoId,
                 xpos: '0',
                 ypos: '0',
-                url: 'https:\\whater.org',
-                artist: 'artist artist'
+                url: 'https:\\whater.org'
               }}
     
     assert_response :success
@@ -35,7 +34,6 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
     expected_xpos     = 45
     expected_ypos     = 76
     expected_url      = 'https:\\whatever.org'
-    expected_artist   = 'VanGo'
     
     post '/v1/sticker',
       params: {photo: {
@@ -43,7 +41,6 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
                 xpos:     expected_xpos, 
                 ypos:     expected_ypos,
                 url:      expected_url,
-                artist:   expected_artist,
               }}
     
     assert_response :success
@@ -57,7 +54,6 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
     assert_equal expected_xpos,   sticker['xpos']
     assert_equal expected_ypos,   sticker['ypos']
     assert_equal expected_url,    sticker['url']
-    assert_equal expected_artist, sticker['artist']
   end
   
   test "Should only return public data" do
@@ -65,7 +61,7 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     
     stickers = JSON.parse(@response.body)[0]
-    expected_values = ["id", "photo_id", "xpos", "ypos", "artist", "url"].to_s
+    expected_values = ["id", "photo_id", "xpos", "ypos", "url"].to_s
     actual_values   = stickers.keys.to_s
     assert_equal expected_values, actual_values
   end

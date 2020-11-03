@@ -39,11 +39,9 @@ class Stickers extends React.Component {
               }));
     if(this.props.activeId)
     {
-      console.log(this.props.activeId);
       GetImgByID(this.props.activeId)
       .then(
         (result) => {
-          console.log(result);
           let photo = result;
           photo = {
             photo_id: photo.data.id, 

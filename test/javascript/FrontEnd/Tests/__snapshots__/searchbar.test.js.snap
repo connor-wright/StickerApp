@@ -34,7 +34,12 @@ exports[`<SearchBar /> should create search images after submit 1`] = `
       <img
         onClick={[Function]}
         src="https://imgur.com/gallery/3nSMulw"
-        style={Object {}}
+        style={
+          Object {
+            "height": "auto",
+            "width": "100%",
+          }
+        }
       />
     </SearchPhoto>
   </div>
