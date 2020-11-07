@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBar from 'SearchBar';
-import SearchPhoto from 'SearchPhoto';
+import SearchBarImg from 'SearchBarImg';
 import { mount } from 'enzyme';
 import {runAllPromises} from '../Utils/utils';
 const BackendAPI = require('BackendAPI');
@@ -10,7 +10,7 @@ let setActiveId;
 let searchBar;
 
 jest.mock('BackendAPI');
-const SearchImgs = BackendAPI.SearchImgs;
+const SearchImgur = BackendAPI.SearchImgur;
 
 describe('<SearchBar />', () => {
   
@@ -26,18 +26,18 @@ describe('<SearchBar />', () => {
   
   it('should search triggers photo search to backend', async () =>{
     //arrange
-    SearchImgs.mockResolvedValue({data: [{images: [{id: 'taco'}]}]});
+    SearchImgur.mockResolvedValue({data: [{images: [{id: 'taco'}]}]});
     
     //act
     const searchForm = searchBar.find('.searchInput');
     await searchForm.simulate('change', {target: {value: 'whatever'}});
     await searchForm.simulate('submit');
-    expect(SearchImgs).toHaveBeenCalled();
+    expect(SearchImgur).toHaveBeenCalled();
   });
   
   it('should create search images after submit', async ()=> {
     //arrange
-    SearchImgs.mockResolvedValue({data: [
+    SearchImgur.mockResolvedValue({data: [
       {images: [{id: 'Taco', link: 'https://imgur.com/gallery/3nSMulw'}]}
     ]});
     
@@ -62,13 +62,13 @@ describe('<SearchBar />', () => {
     await searchForm.simulate('submit');
     
     //assert
-    expect(SearchImgs.mock.calls).toContainEqual([expectedQuery]);
+    expect(SearchImgur.mock.calls).toContainEqual([expectedQuery]);
   });
   
   it('should set the active ID after clicking on an image', async () => {
     //arrange
     const expectedId = 'TacosAreTheBest';
-    SearchImgs.mockResolvedValue({data: [
+    SearchImgur.mockResolvedValue({data: [
       {images: [{id: expectedId, link:'https://imgur.com/gallery/3nSMulw'}]}
     ]});
     const searchForm = searchBar.find('.searchInput');
@@ -78,7 +78,7 @@ describe('<SearchBar />', () => {
     searchBar.update();
     
     //act
-    searchBar.find(SearchPhoto).simulate('click');
+    searchBar.find(SearchBarImg).simulate('click');
     
     //assert
     expect(expectedId).toEqual(activeId)

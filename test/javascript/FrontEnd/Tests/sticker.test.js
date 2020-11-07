@@ -6,9 +6,9 @@ import {runAllPromises} from '../Utils/utils';
 const BackendAPI = require('BackendAPI');
 
 jest.mock('BackendAPI');
-const GetImgs = BackendAPI.GetImgs;
-const GetImgById = BackendAPI.GetImgByID;
-const PostNewPhoto = BackendAPI.PostNewPhoto;
+const GetStickers = BackendAPI.GetStickers;
+const GetImgurImg = BackendAPI.GetImgurImg;
+const PostSticker = BackendAPI.PostSticker;
 let stickersComponent = null;
 let activeId = null;
 
@@ -17,7 +17,7 @@ let activeId = null;
 //TODO figure this out
 describe('<Stickers />' , () => {
   beforeAll(() => {
-    GetImgs.mockResolvedValue([]);
+    GetStickers.mockResolvedValue([]);
   });
   
   beforeEach(() => {
@@ -30,12 +30,12 @@ describe('<Stickers />' , () => {
   });
   
   it('Should request stickers on mount', () => {
-    expect(GetImgs).toHaveBeenCalled();
+    expect(GetStickers).toHaveBeenCalled();
   });
   
   it('Should display stickers after mount', async () => {
     //arrange
-    GetImgs.mockResolvedValue([{
+    GetStickers.mockResolvedValue([{
       url: 'https://imgur.com/gallery/3nSMulw', 
       xpos: '25',
       ypos: '45',
@@ -65,17 +65,17 @@ describe('<Stickers />' , () => {
     const expectedYpos = 75;
     const url = 'https://imgur.com/gallery/3nSMulw';
     const expectedPostNewPhotoArgs = {
-      photo_id: activeId,
+      img_id: activeId,
       url: url,
       xpos: expectedXpos,
       ypos: expectedYpos
     };
     
-    GetImgById.mockResolvedValue({data: {
+    GetImgurImg.mockResolvedValue({data: {
       id: activeId,
       link: url
     }});
-    PostNewPhoto.mockResolvedValue({
+    PostSticker.mockResolvedValue({
       url: url, 
       xpos: expectedXpos,
       ypos: expectedYpos,
@@ -89,8 +89,8 @@ describe('<Stickers />' , () => {
     await stickersComponent.update();
     
     //assert
-    expect(GetImgById.mock.calls).toContainEqual([activeId]);
-    expect(PostNewPhoto.mock.calls).toContainEqual([expectedPostNewPhotoArgs]);
+    expect(GetImgurImg.mock.calls).toContainEqual([activeId]);
+    expect(PostSticker.mock.calls).toContainEqual([expectedPostNewPhotoArgs]);
     //TODO need to assert that the sticker is created
   });
 });

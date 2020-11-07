@@ -1,6 +1,6 @@
 import React from "react";
 import Sticker from "./Sticker";
-import {GetImgs, GetImgByID, PostNewPhoto} from "./BackendAPI";
+import {GetStickers, GetImgurImg, PostSticker} from "./BackendAPI";
 
 class Stickers extends React.Component {
   constructor(props) {
@@ -15,10 +15,10 @@ class Stickers extends React.Component {
   
   componentDidMount(){
     //load stickers
-    GetImgs().then(
+    GetStickers().then(
         (result) => {
           this.setState({
-            stickers: result.map(photo => this.CreateSticker(photo)),
+            stickers: result.map(sticker => this.CreateSticker(sticker)),
             isLoaded: true
           });
         },
@@ -34,23 +34,22 @@ class Stickers extends React.Component {
   {
     let xpos = e.clientX;
     let ypos = e.clientY;
-    let AddSticker = (photo) => this.setState(previousState => ({
-                stickers: [...previousState.stickers, this.CreateSticker(photo)]
+    let AddSticker = (sticker) => this.setState(previousState => ({
+                stickers: [...previousState.stickers, this.CreateSticker(sticker)]
               }));
     if(this.props.activeId)
     {
-      GetImgByID(this.props.activeId)
+      GetImgurImg(this.props.activeId)
       .then(
         (result) => {
-          let photo = result;
-          photo = {
-            photo_id: photo.data.id, 
-            url: photo.data.link,
+          let sticker = {
+            img_id: result.data.id, 
+            url: result.data.link,
             xpos: xpos,
             ypos: ypos
           };
-          //add new photo to the db
-          PostNewPhoto(photo).then((response) => {
+          //add new img to the db
+          PostSticker(sticker).then((response) => {
             AddSticker(response);
           },
           (error) => {
@@ -65,13 +64,13 @@ class Stickers extends React.Component {
     
   }
   
-  CreateSticker(photo){
+  CreateSticker(sticker){
     return(
       <Sticker
-        url={photo.url}
-        xpos = {photo.xpos}
-        ypos = {photo.ypos}
-        key = {photo.id}
+        url={sticker.url}
+        xpos = {sticker.xpos}
+        ypos = {sticker.ypos}
+        key = {sticker.id}
       />
     );
   }

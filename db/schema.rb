@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_25_232449) do
+ActiveRecord::Schema.define(version: 2020_11_07_155812) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "stickers", force: :cascade do |t|
-    t.string "photo_id"
+    t.string "img_id"
     t.integer "xpos"
     t.integer "ypos"
     t.datetime "created_at", precision: 6, null: false

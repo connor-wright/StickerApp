@@ -1,20 +1,20 @@
 import React from "react";
-import SearchPhoto from "./SearchPhoto";
-import {SearchImgs} from "./BackendAPI";
+import SearchBarImg from "./SearchBarImg";
+import {SearchImgur} from "./BackendAPI";
 
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: '', stickers: []};
+    this.state = {value: '', imgs: []};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onClick      = this.onClick.bind(this);
   }
   
   onClick(xi) {
-    const images = this.state.stickers;
+    const images = this.state.imgs;
     this.props.setActiveId(images[xi].id);
-    this.setState({stickers: 
+    this.setState({imgs: 
       images.map((image, index) => 
         ({
           active: index == xi? true: false, id: image.id, url: image.url
@@ -30,21 +30,21 @@ class SearchBar extends React.Component {
   handleSubmit(event) {
     if(this.state.value)
     {
-      let AddStickers = (photos) => this.setState(() => ({
+      let AddImgs = (data) => this.setState(() => ({
         //TODO have the backend filter out theses null cases.
-        stickers: photos.filter(photo => photo.images).map(photo => 
+        imgs: data.filter(data => data.images).map(image => 
         {
-          return {active: false, id: photo.images[0].id, url: photo.images[0].link};
+          return {active: false, id: image.images[0].id, url: image.images[0].link};
         })
       }));
-      SearchImgs(this.state.value).then((result) =>{
-        AddStickers(result.data)});
+      SearchImgur(this.state.value).then((result) =>{
+        AddImgs(result.data)});
     }
     event.preventDefault();
   }
   
   render () {
-    const {stickers} = this.state;
+    const {imgs} = this.state;
     return (
       <div className='SearchBar'>
         <form onSubmit={this.handleSubmit}>
@@ -58,8 +58,8 @@ class SearchBar extends React.Component {
           </label>
             <input type="submit" value="Submit" />
         </form>
-        {stickers.map((image, xi) =>
-          <SearchPhoto 
+        {imgs.map((image, xi) =>
+          <SearchBarImg 
             url={image.url}
             xi={xi}
             key={xi}

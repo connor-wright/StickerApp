@@ -1,5 +1,5 @@
 import React from "react";
-class SearchPhoto extends React.Component {
+class SearchBarImg extends React.Component {
   render () {
     const {url, onClick, xi, active} = this.props;
     const sizingStyle = {width: '100%', height: 'auto'};
@@ -10,4 +10,4 @@ class SearchPhoto extends React.Component {
   }
 }
 
-export default SearchPhoto;
+export default SearchBarImg;

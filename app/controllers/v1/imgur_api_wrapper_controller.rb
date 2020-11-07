@@ -5,7 +5,7 @@ class V1::ImgurApiWrapperController < ApplicationController
     
     pexels_client = ImgurApiWrapper::Client.new()
     
-    if(id = params[:photo_id])
+    if(id = params[:img_id])
       render :json => pexels_client.image(id)
     else
       render :json => pexels_client.search_image("nature")

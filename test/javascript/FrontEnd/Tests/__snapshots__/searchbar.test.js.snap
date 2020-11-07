@@ -24,7 +24,7 @@ exports[`<SearchBar /> should create search images after submit 1`] = `
         value="Submit"
       />
     </form>
-    <SearchPhoto
+    <SearchBarImg
       active={false}
       key="0"
       onClick={[Function]}
@@ -41,7 +41,7 @@ exports[`<SearchBar /> should create search images after submit 1`] = `
           }
         }
       />
-    </SearchPhoto>
+    </SearchBarImg>
   </div>
 </SearchBar>
 `;

@@ -1,4 +1,4 @@
-export function SearchImgs(query){
+export function SearchImgur(query){
   return new Promise((resolve, reject) => 
   {
     fetch('/v1/imgur_api/search/' + query)
@@ -9,7 +9,7 @@ export function SearchImgs(query){
   });
 }
 
-export function GetImgs() {
+export function GetStickers() {
     return new Promise((resolve, reject) => 
     {
       fetch('/v1/stickers')
@@ -22,11 +22,11 @@ export function GetImgs() {
     });
 }
 
-export function GetImgByID(id){
+export function GetImgurImg(id){
   return new Promise((resolve, reject) => 
     {
-      fetch(`/v1/imgur_api/?photo_id=${id}`)
-        .then(res => {console.log(res.body); return res.json()})
+      fetch(`/v1/imgur_api/?img_id=${id}`)
+        .then(res => res.json())
         .then((result) => {
           resolve(result);
         }, (error) => {
@@ -35,17 +35,16 @@ export function GetImgByID(id){
     });
 }
 
-export function PostNewPhoto(photo){
+export function PostSticker(sticker){
   return new Promise((resolve, reject) => 
     {
       $.ajax({
             url: '/v1/sticker',
             type: 'post',
             dataType: 'json',
-            data: {photo: photo},
-            success: function(photo) {
-              //add photo to stickers
-              resolve(photo);
+            data: {sticker: sticker},
+            success: function(sticker) {
+              resolve(sticker);
             },
             error: function(error){
               reject(error);
