@@ -2,10 +2,9 @@ export function SearchImgur(query){
   return new Promise((resolve, reject) => 
   {
     fetch('/v1/imgur_api/search/' + query)
-      .then(res => res.json())
-      .then(result => {
-        resolve(result);
-      });
+      .then(handleErrors)
+      .then( result => resolve(result.json())
+      ).catch(error => reject(error));
   });
 }
 
@@ -13,12 +12,9 @@ export function GetStickers() {
     return new Promise((resolve, reject) => 
     {
       fetch('/v1/stickers')
-        .then(res => res.json())
-        .then((result) => {
-          resolve(result);
-        }, (error) => {
-          reject(error);
-        });
+      .then(handleErrors)
+      .then(result => resolve(result.json()))
+      .catch(error => reject(error));
     });
 }
 
@@ -26,12 +22,9 @@ export function GetImgurImg(id){
   return new Promise((resolve, reject) => 
     {
       fetch(`/v1/imgur_api/?img_id=${id}`)
-        .then(res => res.json())
-        .then((result) => {
-          resolve(result);
-        }, (error) => {
-          reject(error);
-        });
+        .then(handleErrors)
+        .then(result => resolve(result.json()))
+        .catch(error => reject(error));
     });
 }
 
@@ -51,4 +44,11 @@ export function PostSticker(sticker){
             }
           });
     });
+}
+
+function handleErrors(response){
+  if(!response.ok){
+    throw Error(response.statusText);
+  }
+  return response;
 }

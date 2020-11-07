@@ -3,18 +3,26 @@ class V1::ImgurApiWrapperController < ApplicationController
   
   def index
     
-    pexels_client = ImgurApiWrapper::Client.new()
+    imgur_client = ImgurApiWrapper::Client.new()
     
     if(id = params[:img_id])
-      render :json => pexels_client.image(id)
+      render :json => imgur_client.image(id)
     else
-      render :json => pexels_client.search_image("nature")
+      render :json => imgur_client.search_image("nature")
     end
   end
   
   def search
-    pexels_client = ImgurApiWrapper::Client.new()
+    imgur_client = ImgurApiWrapper::Client.new()
     query = params.require(:query)
-    render :json => pexels_client.search_image(query)
+    response = imgur_client.search_image(query)
+    if(response.status == 200)
+      render :json => response.body
+    else 
+      render json: 
+      {
+        :error => 'Imgur returned an error'
+      }.to_json, :status => response.status, :error => "internal-server-error"
+    end
   end
 end

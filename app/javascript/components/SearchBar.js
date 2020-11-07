@@ -37,8 +37,9 @@ class SearchBar extends React.Component {
           return {active: false, id: image.images[0].id, url: image.images[0].link};
         })
       }));
-      SearchImgur(this.state.value).then((result) =>{
-        AddImgs(result.data)});
+      SearchImgur(this.state.value).then(
+        result => AddImgs(result.data),
+        error => alert("Imgur failed to search"));
     }
     event.preventDefault();
   }

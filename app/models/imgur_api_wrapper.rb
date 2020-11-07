@@ -27,8 +27,7 @@ module ImgurApiWrapper
     end
     
     def request(http_method:, endpoint:, params: {})
-      response = client.public_send(http_method, endpoint, params)
-      return response.body
+      return client.public_send(http_method, endpoint, params)
     end
   end
 end
