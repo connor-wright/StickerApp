@@ -6,7 +6,7 @@ module ImgurApiWrapper
   
   class Client
     API_ENDPOINT = 'https://api.imgur.com/3/'
-    CLIENT_ID    = ENV['imgur_client_id']
+    CLIENT_ID    = ENV['IMGUR_CLIENT_ID']
     
     def search_image(query)
       request(http_method: :get, endpoint: "gallery/search/?q=#{query}")
