@@ -2,22 +2,21 @@ require 'test_helper'
 
 class V1::StickerControllerTest < ActionDispatch::IntegrationTest
   test "should be able to create a sticker" do
-    expectedPhotoId = 'asdf'
+    expectedImgId = 'asdf'
     
     post '/v1/sticker',
-      params: {photo:{
-                photo_id: expectedPhotoId,
+      params: {sticker:{
+                img_id: expectedImgId,
                 xpos: '0',
                 ypos: '0',
-                url: 'https:\\whater.org',
-                artist: 'artist artist'
+                url: 'https:\\whater.org'
               }}
     
     assert_response :success
     
     #check we get back the same sticker we created
     sticker = JSON.parse(@response.body)
-    assert_equal expectedPhotoId, sticker['photo_id']
+    assert_equal expectedImgId, sticker['img_id']
   end
   
   test "should be able to retrieve created sticker" do
@@ -27,23 +26,21 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
     
     stickers = JSON.parse(@response.body)
     assert_equal 1, stickers.count
-    assert_equal "TestString", stickers[0]["photo_id"]
+    assert_equal "TestString", stickers[0]["img_id"]
   end
   
   test "should be able to create and retrieve sticker" do 
-    expected_photo_id = 'photo id 1'
-    expected_xpos     = 45
-    expected_ypos     = 76
-    expected_url      = 'https:\\whatever.org'
-    expected_artist   = 'VanGo'
+    expectedImgId = 'photo id 1'
+    expectedXpos     = 45
+    expectedYpos     = 76
+    expectedUrl      = 'https:\\whatever.org'
     
     post '/v1/sticker',
-      params: {photo: {
-                photo_id: expected_photo_id, 
-                xpos:     expected_xpos, 
-                ypos:     expected_ypos,
-                url:      expected_url,
-                artist:   expected_artist,
+      params: {sticker: {
+                img_id: expectedImgId, 
+                xpos:     expectedXpos, 
+                ypos:     expectedYpos,
+                url:      expectedUrl,
               }}
     
     assert_response :success
@@ -52,12 +49,11 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     
     stickers = JSON.parse(@response.body)
-    sticker = stickers.find { |sticker| sticker['photo_id'] == expected_photo_id}
+    sticker = stickers.find { |sticker| sticker['img_id'] == expectedImgId}
     
-    assert_equal expected_xpos,   sticker['xpos']
-    assert_equal expected_ypos,   sticker['ypos']
-    assert_equal expected_url,    sticker['url']
-    assert_equal expected_artist, sticker['artist']
+    assert_equal expectedXpos,   sticker['xpos']
+    assert_equal expectedYpos,   sticker['ypos']
+    assert_equal expectedUrl,    sticker['url']
   end
   
   test "Should only return public data" do
@@ -65,7 +61,7 @@ class V1::StickerControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     
     stickers = JSON.parse(@response.body)[0]
-    expected_values = ["id", "photo_id", "xpos", "ypos", "artist", "url"].to_s
+    expected_values = ["id", "img_id", "xpos", "ypos", "url"].to_s
     actual_values   = stickers.keys.to_s
     assert_equal expected_values, actual_values
   end

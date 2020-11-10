@@ -1,11 +1,11 @@
-import React from "react"
-import PropTypes from "prop-types"
-import Sticker from "./Sticker"
+import React from "react";
+import Sticker from "./Sticker";
+import {GetStickers, GetImgurImg, PostSticker} from "./BackendAPI";
 
 class Stickers extends React.Component {
   constructor(props) {
     super(props);
-    this.onClick    = this.onClick.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.state = {
       error: null,
       isLoaded: false,
@@ -15,13 +15,10 @@ class Stickers extends React.Component {
   
   componentDidMount(){
     //load stickers
-    fetch('/v1/stickers')
-      .then(res => res.json())
-      .then(
+    GetStickers().then(
         (result) => {
           this.setState({
-            
-            stickers: result.map(photo => this.CreateSticker(photo)),
+            stickers: result.map(sticker => this.CreateSticker(sticker)),
             isLoaded: true
           });
         },
@@ -37,50 +34,43 @@ class Stickers extends React.Component {
   {
     let xpos = e.clientX;
     let ypos = e.clientY;
-    let AddSticker = (photo) => this.setState(previousState => ({
-                stickers: [...previousState.stickers, this.CreateSticker(photo)]
+    let AddSticker = (sticker) => this.setState(previousState => ({
+                stickers: [...previousState.stickers, this.CreateSticker(sticker)]
               }));
-    //for now grab a random photo
-    fetch('/v1/pexels_api/')
-      .then(res => res.json())
+    if(this.props.activeId)
+    {
+      GetImgurImg(this.props.activeId)
       .then(
         (result) => {
-          let photo = result.photos[0];
-          photo = {
-            photo_id: photo.id, 
-            url: photo.src.small,
-            artist: photo.photographer,
+          let sticker = {
+            img_id: result.data.id, 
+            url: result.data.link,
             xpos: xpos,
             ypos: ypos
           };
-          //add new photo to the db
-          $.ajax({
-            url: '/v1/sticker',
-            type: 'post',
-            dataType: 'json',
-            data: {photo: photo},
-            success: function(photo) {
-              //add photo to stickers
-              AddSticker(photo);
-            },
-            error: function(error){
-              console.error("Could not add sticker");
-            }
+          //add new img to the db
+          PostSticker(sticker).then((response) => {
+            AddSticker(response);
+          },
+          (error) => {
+            console.error("Could not add sticker " + error);
           });
         },
         (error) => {
-          console.error("Could not add sticker");
+          console.error("Could not add sticker" + error);
         }
-    );
+      );
+    }
+    
   }
   
-  CreateSticker(photo){
+  CreateSticker(sticker){
     return(
-      <Sticker 
-        url={photo.url}
-        xpos = {photo.xpos}
-        ypos = {photo.ypos}
-        key = {photo.id}
+      <Sticker
+        url={sticker.url}
+        xpos = {sticker.xpos}
+        ypos = {sticker.ypos}
+        key = {sticker.id}
       />
     );
   }
@@ -88,7 +78,6 @@ class Stickers extends React.Component {
   render () {
     const {error, isLoaded, stickers} = this.state;
     
-    console.log(stickers);
     if(error){
       return <div>Error: {error.message}</div>;
     }

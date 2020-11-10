@@ -4,40 +4,35 @@ class Sticker extends React.Component {
   {
     super(props);
     this.state = {
-      url: props.url,
-      xClickPos: props.xpos,
-      yClickPos: props.ypos,
-      height: 0,
-      width:  0,
       isLoaded: false
     };
   }
   
-  //load the image width and height
+  //load the image to remove loading flickering
   componentDidMount(){
     let image = new Image();
-    let setWidthHeight = (width, height) => this.setState({
-          width: width,
-          height: height,
-          isLoaded: true
-        });
+    let loaded = () => this.setState({
+      isLoaded: true
+    });
     image.addEventListener("load", function(){
-      let width = this.naturalWidth;
-      let height = this.naturalHeight;
-      
-      setWidthHeight(width, height);
+      loaded();
     });
     
-    image.src = this.state.url;
+    image.src = this.props.url;
   }
   
   render () {
-    const {xClickPos, yClickPos, width, height, url, isLoaded} = this.state;
-    let xpos = xClickPos - width/2;
-    let ypos = yClickPos - height/2;
+    const {xpos, ypos, url} = this.props;
+    const {isLoaded} = this.state;
+    const dimension = 350;
+    
+    let stickerXpos = xpos - dimension/2;
+    let stickerYpos = ypos - dimension/2;
     const Stickerstyle = {
-      top: ypos,
-      left: xpos
+      width: `${dimension}px`,
+      height: `${dimension}px`,
+      top: stickerYpos,
+      left: stickerXpos
     };
     if(!isLoaded){
       return(<React.Fragment/>);
@@ -45,10 +40,12 @@ class Sticker extends React.Component {
     else{
       return (
         <div style={Stickerstyle} className="sticker">
-          <img src={url}/>
+          <img className="stickerImg" src={url}/>
           <div>
-            xpos: {xpos}
-            ypos: {ypos}
+            xpos: {stickerXpos}
+            ypos: {stickerYpos}
+            clickY: {ypos}
+            clickX: {xpos}
           </div>
         </div>
       );

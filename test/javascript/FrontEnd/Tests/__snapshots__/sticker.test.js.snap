@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Stickers /> Should display stickers after mount 1`] = `
+<Stickers>
+  <div
+    className="Stickers"
+    onClick={[Function]}
+  >
+    <Sticker
+      key="Tacos"
+      url="https://imgur.com/gallery/3nSMulw"
+      xpos="25"
+      ypos="45"
+    />
+  </div>
+</Stickers>
+`;

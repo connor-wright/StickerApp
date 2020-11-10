@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchBar /> should create search images after submit 1`] = `
+<SearchBar
+  setActiveId={[Function]}
+>
+  <div
+    className="SearchBar"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <label>
+        search:
+        <input
+          className="searchInput"
+          onChange={[Function]}
+          type="text"
+          value="whatever"
+        />
+      </label>
+      <input
+        type="submit"
+        value="Submit"
+      />
+    </form>
+    <SearchBarImg
+      active={false}
+      key="0"
+      onClick={[Function]}
+      url="https://imgur.com/gallery/3nSMulw"
+      xi={0}
+    >
+      <img
+        onClick={[Function]}
+        src="https://imgur.com/gallery/3nSMulw"
+        style={
+          Object {
+            "height": "auto",
+            "width": "100%",
+          }
+        }
+      />
+    </SearchBarImg>
+  </div>
+</SearchBar>
+`;

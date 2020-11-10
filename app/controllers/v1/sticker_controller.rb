@@ -24,11 +24,10 @@ class V1::StickerController < ApplicationController
   private
   
   def sticker_params
-    params.require(:photo).permit(:photo_id, :xpos, :ypos, :artist, :url)
+    params.require(:sticker).permit(:img_id, :xpos, :ypos, :url)
   end
   
   def select_params()
-    [:id, :photo_id, :xpos, :ypos, :artist, :url]
+    [:id, :img_id, :xpos, :ypos, :url]
   end
-  
 end

@@ -43,5 +43,7 @@ jobs:
         PGHOST: localhost
         PGUSER: postgres
         RAILS_ENV: test
+        pexels_api_key: ${{secrets.pexels_api_key}}
       run: |
         bundle exec rake test
+        yarn test
