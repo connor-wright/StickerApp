@@ -6,7 +6,7 @@
     "@babel/preset-react": "^7.12.5",
     "@rails/webpacker": "5.1.1",
     "elliptic": "^6.5.3",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "node-fetch": "^2.6.1",
     "node-forge": "^0.10.0",
     "pexels": "^1.0.1",
