@@ -7,7 +7,7 @@
     "@rails/webpacker": "5.1.1",
     "elliptic": "^6.5.3",
     "lodash": "^4.17.19",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.7",
     "node-forge": "^0.10.0",
     "pexels": "^1.0.1",
     "prop-types": "^15.7.2",
